@@ -1,5 +1,15 @@
 <?php
-  
+  $title = 'User List';
+
+
+
+     require_once 'Database/connection.php';
+
+     $query = 'SELECT id, email FROM users_information';
+     $stmt = $connect->query($query);
+     $stmt->execute();
+
+     $users = $stmt->fetchAll();
 
 ?>
 
@@ -11,21 +21,33 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title><?php echo $title; ?></title>
     <link href="bootstrap.css" rel="stylesheet">
 </head>
 <body>
    <div class="container">
-       <table class="table table-borderd table-hoverd">
+       <div class="text-center">
+           <h1>User List:</h1>
+       </div>
+       <table class="table table-bordered table-hovered">
           <thead>
-          <tr>
-              <td>Serial</td>
-              <td>User ID</td>
-              <td>Email</td>
-              <td>Action</td>
-          </tr>
+              <tr>
+                  <td>Serial</td>
+                  <td>User ID</td>
+                  <td>Email</td>
+              </tr>
           </thead>
 
+           <thead>
+             <?php $i=1; ?>
+               <?php  foreach($users as $user): ?>
+              <tr>
+                  <td><?php echo $i++; ?></td>
+                  <td><?php echo $user['id']; ?></td>
+                  <td><?php echo $user['email']; ?></td>
+              </tr>
+              <?php endforeach; ?>
+           </thead>
 
        </table>
    </div>
