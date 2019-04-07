@@ -1,7 +1,14 @@
 <?php
   $title = 'User List';
 
+    session_start();
 
+    if(!isset($_SESSION['id'])){
+        var_dump($_SESSION);
+
+        header('Location:index.php');
+        exit();
+    }
 
      require_once 'Database/connection.php';
 
@@ -48,8 +55,12 @@
               </tr>
               <?php endforeach; ?>
            </thead>
-
        </table>
+
+       <div class="row">
+           <a href="logout.php" class="btn btn-danger">Logout</a>
+       </div>
+
    </div>
 </body>
 </html>
